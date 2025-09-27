@@ -14,7 +14,6 @@ test.describe('Login Page Tests', () => {
        await loginPage.clickLoginButton();
 
        await expect(loginPage.loggedInMessage).toHaveText('You logged into a secure area!');
-
      });
 
 });
