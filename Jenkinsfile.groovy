@@ -11,13 +11,12 @@ pipeline {
         }
         stage('Checkout') {
             steps {
-                // Use 'git' step explicitly if not using SCM pipe
                 git url: 'https://github.com/sebas-code28/Playwright-Framework.git/', 
-                branch: 'master',
-                credentialsId: 'SebaGithub'
+                    branch: 'master',
+                    credentialsId: 'SebaGithub'
             }
         }
-        stage('Install dependencies') {
+        stage('Install Dependencies') {
             steps {
                 bat 'npm install'
             }
@@ -27,20 +26,20 @@ pipeline {
                 bat 'npx playwright install --with-deps'
             }
         }
-        stage('Run tests') {
+        stage('Run Tests') {
             steps {
                 bat 'npm run test'
             }
         }
-        stage('Publish Playwright HTML report') {
+        stage('Publish Playwright Report') {
             steps {
                 archiveArtifacts artifacts: 'playwright-report/**'
+                publishHTML(target: [
+                    reportDir: 'playwright-report',
+                    reportFiles: 'index.html',
+                    reportName: 'Playwright Report'
+                ])
             }
-        }
-    }
-    post {
-        always {
-            cleanWs()
         }
     }
 }
