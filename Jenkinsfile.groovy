@@ -9,6 +9,13 @@ pipeline {
                 deleteDir()
             }
         }
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/sebas-code28/Playwright-Framework.git/', 
+                    branch: 'master',
+                    credentialsId: 'SebaGithub'
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
