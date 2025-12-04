@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Checkout') {
             steps {
-                // Use 'git' step explicitly if not using SCM pipeline
+                // Use 'git' step explicitly if not using SCM pipe
                 git url: 'https://github.com/sebas-code28/Playwright-Framework.git/', 
                 branch: 'master',
                 credentialsId: 'SebaGithub'
